@@ -9,5 +9,4 @@ router.post("/login", validator.loginValidator, login);
 router.post("/logout", auth, logout);
 router.get("/current", auth, current);
 
-
 module.exports = router;
