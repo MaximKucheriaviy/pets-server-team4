@@ -11,14 +11,14 @@ app.listen(Number(PORT), () => {
 });
 
 
-mongoose.set('strictQuery', false);
-mongoose.connect(DB_INFO)
-.then(() => {
-    console.log("Database connected");
-})
-.catch(err => {
-    console.log(err);
-})
+// mongoose.set('strictQuery', false);
+// mongoose.connect(DB_INFO)
+// .then(() => {
+//     console.log("Database connected");
+// })
+// .catch(err => {
+//     console.log(err);
+// })
 
 
 
