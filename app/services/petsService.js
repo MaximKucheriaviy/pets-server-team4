@@ -1,28 +1,25 @@
-const isValid = require('mongoose').Types.ObjectId.isValid;
-const ObjectId = require('mongoose').Types.ObjectId;
-const { deleteImage } = require('./google-cloud');
+const isValid = require("mongoose").Types.ObjectId.isValid;
+const ObjectId = require("mongoose").Types.ObjectId;
+const { deleteImage } = require("./google-cloud");
 
-const { Pet, User } = require('../models');
+const { Pet } = require("../models");
 
-const getAllPet = async userID => {
-  const user = await User.findOne({ _id: userID }).populate('pets');
-  return user.pets;
+const getAllPet = async (userID) => {
+  const pets = await Pet.find({ owner: userID }).populate(
+    "owner",
+    "_id name email"
+  );
+  return pets;
 };
 
-const getPetById = async petID => {
+const getPetById = async (petID) => {
   if (!isValid(petID)) return false;
   return await Pet.findById(petID);
 };
 
 const createPet = async (userID, pet) => {
-  const newPet = await Pet.create({ ...pet });
-  const updateUser = await User.findByIdAndUpdate(
-    { _id: userID },
-    { $push: { pets: newPet._id } }
-  );
-  if (newPet && updateUser) {
-    return newPet;
-  }
+  const newPet = await Pet.create({ ...pet, owner: userID });
+  return newPet;
 };
 
 const updatePetInfo = async (petID, info) => {
@@ -57,18 +54,16 @@ const addPetAvatar = async (avatarURL, pet) => {
   return avatar;
 };
 
-const removePet = async (userID, petsID) => {
+const removePet = async (petsID) => {
   if (!isValid(petsID)) return false;
-  const user = await User.findOne({ _id: userID });
-  if (!user.pets.includes(ObjectId(petsID))) {
-    return false;
+
+  
+  const data = await Pet.findByIdAndRemove(petsID);
+  const destination = "pets";
+  if (data.avatarURL) {
+    await deleteImage(data.avatarURL, destination);
   }
-  const { avatarURL } = await Pet.findByIdAndRemove({ _id: petsID });
-  const destination = 'users/pets';
-  if (avatarURL) {
-    await deleteImage(avatarURL, destination);
-  }
-  return await user.update({ $pull: { pets: petsID } });
+  return data;
 };
 
 module.exports = {

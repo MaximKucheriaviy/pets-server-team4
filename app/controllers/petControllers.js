@@ -1,27 +1,21 @@
-
-const { petsService } = require('../services');
+const { petsService } = require("../services");
 
 const { getAllPet, createPet, removePet, updatePetInfo, addPetAvatar } =
   petsService;
 
-
-
 const getPets = async (req, res) => {
-  const result = await getAllPet(req.user.id, req.query);
-
-  res.json({ code: 200, data: { pet: result }, status: 'Success' });
+  const { _id } = req.user;
+  const result = await getAllPet(_id);
+  res.json({ code: 200, data: { pets: result }, status: "Success" });
 };
 
-
 const addPet = async (req, res, next) => {
-  const user = req.user;
+  const { _id } = req.user;
   const pet = req.body;
-  const newPet = await createPet(user._id, pet);
+  const newPet = await createPet(_id, pet);
   req.result = newPet;
   next();
 };
-
-
 
 const updatePet = async (req, res, next) => {
   const { petID } = req.params;
@@ -32,34 +26,38 @@ const updatePet = async (req, res, next) => {
 };
 
 const updatePetAvatar = async (req, res, next) => {
-  const avatarURL = req.avatarURL;
+  const avatarURL = req.body.avatarURL;
   const pet = req.result;
   const result = await addPetAvatar(avatarURL, pet);
   if (!result) {
     res.status(500).json({
       code: 500,
-      status: 'Failed',
-      message: 'Upload avatar failed, try again',
+      status: "Failed",
+      message: "Upload avatar failed, try again",
     });
   }
   res.status(201).json({
     code: 201,
-    status: 'Success',
+    status: "Success",
     data: {
       pet: result,
     },
   });
 };
 
-
-const deletePet = async (req, res, next) => {
-  const result = await removePet(req.user.id, req.params.petID);
+const deletePet = async (req, res) => {
+  const { petID } = req.params;
+  const result = await removePet(petID);
 
   if (!result) {
-    next();
-    return;
+    return res.status(404).json({
+      status: "error",
+      code: 404,
+      message: "Not found",
+    });
   }
-  res.json({ code: 200, message: 'Pet is deleted', status: 'Success' });
+
+  res.json({ code: 200, message: "Pet is deleted", status: "Success", result });
 };
 
 module.exports = {

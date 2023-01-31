@@ -1,6 +1,6 @@
 const User = require("./userModel");
 const Notice = require("./noticeModel");
-const Pet = require('./pets');
+const Pet = require('./petModel');
 
 module.exports = {
   User,

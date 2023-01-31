@@ -16,7 +16,6 @@ const userSchema = new Schema({
         required: true,
     },
     token: String,
-    pets: [{ type: Schema.Types.ObjectId, ref: 'pets' }],
 })
 
 const User = model('users', userSchema);
