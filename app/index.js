@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { userRouter, infoRouter } = require("./routes");
+const { userRouter, infoRouter, petRouter } = require("./routes");
 const { noticeRouter } = require("./routes/notices");
 const { morgan, defaultError, errorCatcher } = require("./middlewares");
 

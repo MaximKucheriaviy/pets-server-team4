@@ -6,6 +6,6 @@ const petRouter = require('./petRoutes');
 module.exports = {
   infoRouter,
   noticeRouter,
-    petRouter,
-    userRouter,
+  petRouter,
+  userRouter,
 };
