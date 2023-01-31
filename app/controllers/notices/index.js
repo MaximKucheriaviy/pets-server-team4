@@ -1,5 +1,7 @@
-const add = require("./add");
+const getByCategory = require("./getByCategory");
+const getById = require("./getById");
 
 module.exports = {
-  add,
+  getByCategory,
+  getById,
 };

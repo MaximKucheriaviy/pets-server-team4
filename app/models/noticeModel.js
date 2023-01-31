@@ -46,6 +46,11 @@ const noticeSchema = new Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+    enum: ["sell", "lostFound", "inGoodHands"],
+  },
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",
