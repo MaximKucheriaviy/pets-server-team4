@@ -59,7 +59,7 @@ const removePet = async (petsID) => {
 
   
   const data = await Pet.findByIdAndRemove(petsID);
-  const destination = "pets";
+  const destination = "user/pets";
   if (data.avatarURL) {
     await deleteImage(data.avatarURL, destination);
   }

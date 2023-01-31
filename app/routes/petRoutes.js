@@ -1,7 +1,7 @@
 const express = require('express');
 const petController = require('../controllers/petControllers');
 
-const {auth, petsValidation, fileLoader,} = require('../middlewares');
+const {auth, petsValidation, fileLoader, isValidPetId} = require('../middlewares');
 const { ctrlWrapper, upload } = require('../helpers');
 
 const router = express.Router();
@@ -25,10 +25,11 @@ router.post(
     ctrlWrapper(fileLoader),
     ctrlWrapper(updatePetAvatar)
   );  
-  router.delete('/:petID', auth, ctrlWrapper(deletePet)); 
+  router.delete('/:petID', auth, isValidPetId, ctrlWrapper(deletePet)); 
   router.put(
     '/:petID',
     auth,
+    isValidPetId, 
     upload.single('avatar'),
     petsValidation,
     ctrlWrapper(updatePet),

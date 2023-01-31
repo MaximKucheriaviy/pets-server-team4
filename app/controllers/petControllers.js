@@ -48,6 +48,7 @@ const updatePetAvatar = async (req, res, next) => {
 const deletePet = async (req, res) => {
   const { petID } = req.params;
   const result = await removePet(petID);
+  console.log(result)
 
   if (!result) {
     return res.status(404).json({
