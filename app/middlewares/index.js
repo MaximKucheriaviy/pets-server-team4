@@ -5,6 +5,7 @@ const errorCatcher = require('./errorCatcher');
 const auth = require('./auth');
 const { petsValidation } = require('./petsValidation');
 const fileLoader = require('./fileLoader');
+const isValidId = require("./isValidId");
 
 module.exports = {
     morgan,
@@ -14,4 +15,5 @@ module.exports = {
     auth,
     petsValidation,
     fileLoader,
-}
+  isValidId,
+};
