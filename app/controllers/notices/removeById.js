@@ -2,8 +2,8 @@ const { Notice } = require("../../models/noticeModel");
 const { httpError } = require("../../helpers");
 
 const removeById = async (req, res) => {
-  const { id } = req.params;
-  const result = await Notice.findByIdAndRemove(id);
+  const { noticeId } = req.params;
+  const result = await Notice.findByIdAndRemove(noticeId);
   if (!result) {
     throw httpError(404);
   }
