@@ -1,5 +1,5 @@
 
-const { petsService } = require('../../services');
+const { petsService } = require('../services');
 
 const { getAllPet, createPet, removePet, updatePetInfo, addPetAvatar } =
   petsService;

@@ -1,5 +1,5 @@
 const express = require('express');
-const { petController } = require('../controllers/userControllers');
+const petController = require('../controllers/petControllers');
 
 const {auth, petsValidation, fileLoader,} = require('../middlewares');
 const { ctrlWrapper, upload } = require('../helpers');
