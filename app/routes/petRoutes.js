@@ -1,7 +1,7 @@
 const express = require('express');
 const petController = require('../controllers/petControllers');
 
-const {auth, petsValidation, fileLoader, isValidPetId} = require('../middlewares');
+const {authPet, petsValidation, fileLoader, isValidPetId} = require('../middlewares');
 const { ctrlWrapper, upload } = require('../helpers');
 
 const router = express.Router();
@@ -15,20 +15,20 @@ const {
   } = petController;
 
 
-router.get('/', auth, ctrlWrapper(getPets));
+router.get('/', authPet, ctrlWrapper(getPets));
 router.post(
     '/',
-    auth,
+    authPet,
     upload.single('avatar'),
     petsValidation,
     ctrlWrapper(addPet),
     ctrlWrapper(fileLoader),
     ctrlWrapper(updatePetAvatar)
   );  
-  router.delete('/:petID', auth, isValidPetId, ctrlWrapper(deletePet)); 
+  router.delete('/:petID', authPet, isValidPetId, ctrlWrapper(deletePet)); 
   router.put(
     '/:petID',
-    auth,
+    authPet,
     isValidPetId, 
     upload.single('avatar'),
     petsValidation,

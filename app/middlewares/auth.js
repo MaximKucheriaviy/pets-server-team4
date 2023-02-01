@@ -5,34 +5,23 @@ require("dotenv").config;
 const { SECRET_WORD } = process.env;
 
 const auth = async (req, res, next) => {
-  const { authorization = "" } = req.headers;
-  const [bearer, token] = authorization.split(" ");
   try {
-    if (bearer !== "Bearer") {
-      res.status(401).json({
-        status: "error",
-        code: 401,
-        message: "Not authorized",
-      });
-    }
+    const token = req.headers.authorization;
     const { _id } = jwt.verify(token, SECRET_WORD);
+    console.log(req.headers.authorization);
+    if (!_id) {
+      throw new Error();
+    }
     const user = await User.findById(_id);
-
-    if (!user || !user.token) {
-      res.status(401).json({
-        status: "error",
-        code: 401,
-        message: "Not authorized",
-      });
+    if (user.token !== token) {
+      throw new Error();
     }
-
-    req.user = user;
+    req._id = _id;
     next();
-  } catch (error) {
-    if (error.message === "invalid signature") {
-      error.status = 401;
-    }
-    next(error);
+  } catch (err) {
+    err.status = 401;
+    err.message = "Missing header with authorization token";
+    next(err);
   }
 };
 
