@@ -1,5 +1,6 @@
-const jwt = require('jsonwebtoken');
-const {User} = require('../models');
+const jwt = require("jsonwebtoken");
+
+const { User } = require("../models/userModel");
 require('dotenv').config;
 
 const {SECRET_WORD} = process.env;
@@ -24,6 +25,5 @@ const auth = async (req, res, next) => {
         next(err);
     }
 }
-
 
 module.exports = auth;
