@@ -16,7 +16,7 @@ module.exports = {
     validator,
     errorCatcher,
     auth,
-    validation
+    validation,
     petsValidation,
     fileLoader,
   isValidId,
