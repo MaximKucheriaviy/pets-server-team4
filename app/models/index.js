@@ -1,5 +1,9 @@
-const User = require('./userModel');
+const User = require("./userModel");
+const Notice = require("./noticeModel");
+const Pet = require('./pets');
 
 module.exports = {
-    User,
-}
+  User,
+  Notice,
+    Pet
+};
