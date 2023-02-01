@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(morgan.morganLogger(morgan.morganSetup));
 app.use(express.json());
-app.use("/user", userRouter);
+app.use("api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use("/info", infoRouter);
 app.use("/api/notices", noticeRouter);
