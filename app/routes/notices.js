@@ -9,13 +9,13 @@ const router = express.Router();
 
 router.get("/categories/:type", ctrlWrapper(controller.getByCategory));
 router.get("/:noticeId", isValidId, ctrlWrapper(controller.getById));
+router.get("/", auth, ctrlWrapper(controller.getAllByOwner));
 router.post(
   "/",
   auth,
   validateBody(schemas.addSchema),
   ctrlWrapper(controller.addNotice)
 );
-router.get("/", auth, ctrlWrapper(controller.getAllByOwner));
 router.delete(
   "/:noticeId",
   auth,

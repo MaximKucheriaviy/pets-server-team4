@@ -29,14 +29,6 @@ const noticeSchema = new Schema(
       required: [true, "Set sex of your pet"],
       enum: ["female", "male"],
     },
-    // email: {
-    //   type: String,
-    //   required: [true, "Set your email"],
-    // },
-    // phone: {
-    //   type: String,
-    //   required: [true, "Set your phone number"],
-    // },
     price: {
       type: String,
     },
@@ -50,7 +42,7 @@ const noticeSchema = new Schema(
     category: {
       type: String,
       required: [true, "Set category of your notice"],
-      enum: ["sell", "lost-found", "in-good-hands"],
+      enum: ["sell", "lost-found", "for-free"],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -79,18 +71,12 @@ const addSchema = Joi.object({
   breed: Joi.string(),
   place: Joi.string().required(),
   sex: Joi.string().valid("male", "female").required(),
-  // email: Joi.string()
-  //   .regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-  //   .required(),
-  // phone: Joi.number().required().min(5).max(16).integer(),
   price: Joi.number().greater(0).integer(),
   imageURL: Joi.string(),
   comment: Joi.string()
     .regex(/^[0-9a-zA-Zа-яА-ЯёЁіІїЇєЄ!@#$%^&+=*,:;><'"~`?_\-()\/.|\s]{8,120}$/)
     .required(),
-  category: Joi.string()
-    .valid("sell", "lost-found", "in-good-hands")
-    .required(),
+  category: Joi.string().valid("sell", "lost-found", "for-free").required(),
 });
 
 const schemas = { addSchema };
