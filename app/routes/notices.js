@@ -16,4 +16,11 @@ router.delete(
   ctrlWrapper(controller.removeNoticeById)
 );
 
+//
+router.get("/favorite", auth, controller.getUserFavorite);
+//
+router.post("/favorite/:noticeId", auth, controller.updateUserFavorite);
+//
+router.delete("/favorite/:noticeId", auth, controller.updateAndRemoveFavorite);
+
 module.exports = router;
