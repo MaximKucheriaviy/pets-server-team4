@@ -2,16 +2,23 @@ const express = require("express");
 
 const controller = require("../controllers/notices");
 const { ctrlWrapper } = require("../helpers");
-const { auth, isValidId } = require("../middlewares");
+const { auth, isValidId, validateBody } = require("../middlewares");
+const { schemas } = require("../models/noticeModel");
 
 const router = express.Router();
 
 router.get("/categories/:type", ctrlWrapper(controller.getByCategory));
 router.get("/:noticeId", isValidId, ctrlWrapper(controller.getById));
-router.post("/", ctrlWrapper(controller.addNotice));
-router.get("/", ctrlWrapper(controller.getAllByOwner));
+router.get("/", auth, ctrlWrapper(controller.getAllByOwner));
+router.post(
+  "/",
+  auth,
+  validateBody(schemas.addSchema),
+  ctrlWrapper(controller.addNotice)
+);
 router.delete(
   "/:noticeId",
+  auth,
   isValidId,
   ctrlWrapper(controller.removeNoticeById)
 );
