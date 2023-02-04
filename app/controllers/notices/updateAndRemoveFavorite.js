@@ -1,16 +1,14 @@
 const { User } = require("../../models/userModel");
 
 const updateAndRemoveFavorite = async (req, res) => {
-  const user = await User.find({ _id: req._id });
-
   const result = await User.findByIdAndUpdate(
-    user,
+    req._id,
     {
       $pull: { favoriteNotices: req.params.noticeId },
     },
     { new: true }
   );
-  res.send(result);
+  res.json(result);
 };
 
 module.exports = updateAndRemoveFavorite;
