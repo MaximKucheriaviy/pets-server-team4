@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const BASE_URL = "https://storage.googleapis.com/pets-project-api";
-const { uploadImageForNotice, uploadImage } = require("../../services");
+const { uploadImageForNotice } = require("../../services");
 const { Notice } = require("../../models/noticeModel");
 
 const addNotice = async (req, res) => {
@@ -20,7 +20,6 @@ const addNotice = async (req, res) => {
 
     const result = await Notice.create({ ...req.body, owner, imageURL });
 
-    // await uploadImage(fileName, originalname, "notice");
     await uploadImageForNotice(originalname, fileName);
     await fs.unlink(req.file.path);
     res.status(201).json(result);
