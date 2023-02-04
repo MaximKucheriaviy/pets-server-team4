@@ -9,17 +9,16 @@ const baseURL = "https://storage.googleapis.com";
 async function uploadImageForNotice(fileName, destFileName) {
   const filePath = `${tmpDirPath}/${fileName}`;
   const options = {
-    destination: "destFileName",
+    destination: destFileName,
     metadata: {
       cacheControl: "no-store",
     },
   };
 
   await storage.bucket(bucketName).upload(filePath, options);
-  console.log(`${filePath} uploaded to ${bucketName}`);
 }
 
-async function deleteImageForNotice(imageURL, destination) {
+async function deleteImageFromNotice(imageURL, destination) {
   if (!imageURL) {
     return;
   }
@@ -29,8 +28,4 @@ async function deleteImageForNotice(imageURL, destination) {
   console.log(`gs://${bucketName}/${fileName} deleted`);
 }
 
-async function getImageUrl(fileName, destination) {
-  return `${baseURL}/${bucketName}/${destination}/${fileName}`;
-}
-
-module.exports = { uploadImageForNotice, getImageUrl, deleteImageForNotice };
+module.exports = { uploadImageForNotice, deleteImageFromNotice };
