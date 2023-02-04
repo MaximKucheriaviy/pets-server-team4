@@ -3,13 +3,13 @@ const { Storage } = require("@google-cloud/storage");
 
 const storage = new Storage();
 const bucketName = "pets-project-api";
-const tmpDirPath = path.join(__dirname, "..", "/", "tmp");
+const tmpDirPath = path.join(__dirname, "../", "tmp");
 const baseURL = "https://storage.googleapis.com";
 
-async function uploadImage(fileName, avatarName, destination) {
+async function uploadImageForNotice(fileName, destFileName) {
   const filePath = `${tmpDirPath}/${fileName}`;
   const options = {
-    destination: `${destination}/${avatarName}`,
+    destination: "destFileName",
     metadata: {
       cacheControl: "no-store",
     },
@@ -19,20 +19,18 @@ async function uploadImage(fileName, avatarName, destination) {
   console.log(`${filePath} uploaded to ${bucketName}`);
 }
 
-async function deleteImage(imageURL, destination) {
+async function deleteImageForNotice(imageURL, destination) {
   if (!imageURL) {
     return;
   }
-  const fileName = imageURL.slice(imageURL.length - 23, imageURL.length);
-  const path = `${destination}/${fileName}`;
-  console.log(`filename:${fileName}`);
+
   await storage.bucket(bucketName).file(path).delete();
 
   console.log(`gs://${bucketName}/${fileName} deleted`);
 }
 
-async function getAvatarUrl(fileName, destination) {
+async function getImageUrl(fileName, destination) {
   return `${baseURL}/${bucketName}/${destination}/${fileName}`;
 }
 
-module.exports = { uploadImage, deleteImage, getAvatarUrl };
+module.exports = { uploadImageForNotice, getImageUrl, deleteImageForNotice };

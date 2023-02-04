@@ -19,6 +19,7 @@ const noticeSchema = new Schema(
     },
     breed: {
       type: String,
+      default: "love",
     },
     place: {
       type: String,
@@ -31,9 +32,11 @@ const noticeSchema = new Schema(
     },
     price: {
       type: String,
+      default: null,
     },
     imageURL: {
       type: String,
+      default: "",
     },
     comment: {
       type: String,
@@ -72,7 +75,6 @@ const addSchema = Joi.object({
   place: Joi.string().required(),
   sex: Joi.string().valid("male", "female").required(),
   price: Joi.number().greater(0).integer(),
-  imageURL: Joi.string(),
   comment: Joi.string()
     .regex(/^[0-9a-zA-Zа-яА-ЯёЁіІїЇєЄ!@#$%^&+=*,:;><'"~`?_\-()\/.|\s]{8,120}$/)
     .required(),
