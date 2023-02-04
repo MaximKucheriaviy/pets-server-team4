@@ -49,10 +49,6 @@ const noticeSchema = new Schema(
       ref: "user",
       required: true,
     },
-    favorite: {
-      type: Boolean,
-      default: false,
-    },
   },
   { versionKey: false }
 );

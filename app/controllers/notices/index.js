@@ -11,9 +11,9 @@ module.exports = {
   getByCategory,
   getById,
   updateUserFavorite,
+  getUserFavorite,
   updateAndRemoveFavorite,
   addNotice,
   getAllByOwner,
   removeNoticeById,
-  getUserFavorite,
 };
