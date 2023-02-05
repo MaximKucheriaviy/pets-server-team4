@@ -30,7 +30,7 @@ router.post(
     '/:petID',
     authPet,
     isValidPetId, 
-    upload.single('avatarUR'),
+    upload.single('avatarURL'),
     petsValidation,
     ctrlWrapper(updatePet),
     ctrlWrapper(fileLoader),
