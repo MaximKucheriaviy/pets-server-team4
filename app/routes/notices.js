@@ -1,8 +1,8 @@
 const express = require("express");
 
 const controller = require("../controllers/notices");
-const { ctrlWrapper } = require("../helpers");
-const { auth, isValidId, validateBody } = require("../middlewares");
+const { ctrlWrapper, upload } = require("../helpers");
+const { auth, isValidId, validateBody, fileLoader } = require("../middlewares");
 const { schemas } = require("../models/noticeModel");
 
 const router = express.Router();
@@ -19,6 +19,7 @@ router.get("/", auth, ctrlWrapper(controller.getAllByOwner));
 router.post(
   "/",
   auth,
+  upload.single("petImage"),
   validateBody(schemas.addSchema),
   ctrlWrapper(controller.addNotice)
 );

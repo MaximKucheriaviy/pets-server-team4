@@ -1,17 +1,17 @@
-const path = require('path');
-const { Storage } = require('@google-cloud/storage');
+const path = require("path");
+const { Storage } = require("@google-cloud/storage");
 
 const storage = new Storage();
-const bucketName = 'pets-rest-api-avatars';
-const tmpDirPath = path.join(__dirname, '..', '/', 'tmp');
-const baseURL = 'https://storage.googleapis.com';
+const bucketName = "pets-project-api";
+const tmpDirPath = path.join(__dirname, "..", "/", "tmp");
+const baseURL = "https://storage.googleapis.com";
 
 async function uploadImage(fileName, avatarName, destination) {
   const filePath = `${tmpDirPath}/${fileName}`;
   const options = {
     destination: `${destination}/${avatarName}`,
     metadata: {
-      cacheControl: 'no-store',
+      cacheControl: "no-store",
     },
   };
 
