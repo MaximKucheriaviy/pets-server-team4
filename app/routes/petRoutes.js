@@ -19,7 +19,7 @@ router.get('/', authPet, ctrlWrapper(getPets));
 router.post(
     '/',
     authPet,
-    upload.single('avatar'),
+    upload.single('avatarURL'),
     petsValidation,
     ctrlWrapper(addPet),
     ctrlWrapper(fileLoader),
@@ -30,7 +30,7 @@ router.post(
     '/:petID',
     authPet,
     isValidPetId, 
-    upload.single('avatar'),
+    upload.single('avatarUR'),
     petsValidation,
     ctrlWrapper(updatePet),
     ctrlWrapper(fileLoader),

@@ -2,7 +2,7 @@ const path = require('path');
 const { Storage } = require('@google-cloud/storage');
 
 const storage = new Storage();
-const bucketName = 'pets-rest-api-avatars';
+const bucketName = 'pets-project-api';
 const tmpDirPath = path.join(__dirname, '..', '/', 'tmp');
 const baseURL = 'https://storage.googleapis.com';
 

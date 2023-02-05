@@ -23,12 +23,13 @@ const createPet = async (userID, pet) => {
 };
 
 const updatePetInfo = async (petID, info) => {
-  const { name, birthdate, breed, comments } = info;
+  console.log(info)
+  const { name, date, breed, comments } = info;
   const pet = await Pet.findByIdAndUpdate(
     { _id: petID },
     {
       name: name,
-      birthdate: birthdate,
+      date: date,
       breed: breed,
       comments: comments,
     },
@@ -59,7 +60,7 @@ const removePet = async (petsID) => {
 
   
   const data = await Pet.findByIdAndRemove(petsID);
-  const destination = "user/pets";
+  const destination = "pets";
   if (data.avatarURL) {
     await deleteImage(data.avatarURL, destination);
   }

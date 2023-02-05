@@ -14,7 +14,7 @@ const addPetSchema = Joi.object({
       'string.max': 'Name should have a maximum length of {#limit}',
       'string.pattern.base': 'Name should have only letters',
     }),
-  birthdate: Joi.date()
+  date: Joi.date()
     .format('DD.MM.YYYY')
     .raw()
     .max('now')
