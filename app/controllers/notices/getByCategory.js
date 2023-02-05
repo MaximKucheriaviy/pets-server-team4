@@ -3,14 +3,24 @@ const { httpError } = require("../../helpers");
 
 const getByCategory = async (req, res) => {
   const { type: category } = req.params;
+  const { query } = req.query;
+  console.log(query);
+
   const result = await Notice.find({ category });
-  console.log("category");
 
   if (!result) {
     throw httpError(404, "Not found");
   }
 
-  res.json(result);
+  if (query) {
+    const filteredResult = result.filter(({ title }) =>
+      title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    res.json(filteredResult);
+  } else {
+    res.json(result);
+  }
 };
 
 module.exports = getByCategory;
