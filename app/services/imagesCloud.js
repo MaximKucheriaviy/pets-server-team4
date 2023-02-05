@@ -6,7 +6,7 @@ const bucketName = "pets-project-api";
 const tmpDirPath = path.join(__dirname, "../", "tmp");
 const baseURL = "https://storage.googleapis.com";
 
-async function uploadImageForNotice(fileName, destFileName) {
+async function uploadImageToStorage(fileName, destFileName) {
   const filePath = `${tmpDirPath}/${fileName}`;
   const options = {
     destination: destFileName,
@@ -18,14 +18,8 @@ async function uploadImageForNotice(fileName, destFileName) {
   await storage.bucket(bucketName).upload(filePath, options);
 }
 
-async function deleteImageFromNotice(imageURL, destination) {
-  if (!imageURL) {
-    return;
-  }
-
-  await storage.bucket(bucketName).file(path).delete();
-
-  console.log(`gs://${bucketName}/${fileName} deleted`);
+async function deleteImageFromStorage(filePath) {
+  await storage.bucket(bucketName).file(filePath).delete();
 }
 
-module.exports = { uploadImageForNotice, deleteImageFromNotice };
+module.exports = { uploadImageToStorage, deleteImageFromStorage };

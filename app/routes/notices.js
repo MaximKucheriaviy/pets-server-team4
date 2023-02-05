@@ -2,7 +2,7 @@ const express = require("express");
 
 const controller = require("../controllers/notices");
 const { ctrlWrapper, upload } = require("../helpers");
-const { auth, isValidId, validateBody, fileLoader } = require("../middlewares");
+const { auth, isValidId, validateBody } = require("../middlewares");
 const { schemas } = require("../models/noticeModel");
 
 const router = express.Router();
