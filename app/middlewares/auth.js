@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const { User } = require("../models/userModel");
-require('dotenv').config;
+require("dotenv").config;
 
 const { SECRET_WORD } = process.env;
 
@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const { _id } = jwt.verify(token, SECRET_WORD);
-    console.log(req.headers.authorization);
+
     if (!_id) {
       throw new Error();
     }

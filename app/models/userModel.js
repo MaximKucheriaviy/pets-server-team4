@@ -1,63 +1,62 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 
-const emailRegexp =
-  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-const phoneReqexp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-const userSchema = new Schema({
+const phoneReqexp =
+  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+const userSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-         match: emailRegexp,
+      type: String,
+      match: emailRegexp,
       unique: true,
-        required: [true, "Email is required"],
+      required: [true, "Email is required"],
     },
-  password: {
-    minlength: 7,
-  
-        type: String,
+    password: {
+      minlength: 7,
+
+      type: String,
       required: [true, "Set password for user"],
-  },
-  city: {
+    },
+    city: {
       type: String,
-        required: true,
-  },
-
-      avatarURL: {
-      type: String,
-   requireda: true,
+      required: true,
     },
 
-  phone: {
-     match: phoneReqexp,
+    avatarURL: {
       type: String,
-        required: true,
-  },
+      requireda: true,
+    },
 
-  birthday: {
+    phone: {
+      match: phoneReqexp,
+      type: String,
+      required: true,
+    },
+
+    birthday: {
       type: String,
 
-        default: null,
-  },
-  
-  token: {
+      default: null,
+    },
+
+    token: {
       type: String,
       default: null,
     },
-},
+    favoriteNotices: [{ ref: "notice", type: Schema.Types.ObjectId }],
+  },
   { versionKey: false, timestamps: true }
-)
+);
 
 userSchema.methods.setPassword = function (password) {
-  this.password = bcrypt.hashSync(
-    password,
-    bcrypt.genSaltSync(10)
-  );
+  this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
 userSchema.methods.comparePassword = function (password) {
@@ -83,7 +82,7 @@ const schemas = {
   joiLoginSchema,
 };
 
-const User = model('user', userSchema);
+const User = model("user", userSchema);
 
 module.exports = {
   User,

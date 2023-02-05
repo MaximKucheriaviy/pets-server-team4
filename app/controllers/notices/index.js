@@ -1,6 +1,6 @@
-const addToFavorite = require("./addToFavorite");
-const getAllByFav = require("./getAllByFav");
-const removeById = require("./removeById");
+const updateUserFavorite = require("./updateUserFavorite");
+const getUserFavorite = require("./getUserFavorite");
+const updateAndRemoveFavorite = require("./updateAndRemoveFavorite");
 const getByCategory = require("./getByCategory");
 const getById = require("./getById");
 const addNotice = require("./addNotice");
@@ -10,9 +10,9 @@ const removeNoticeById = require("./removeNoticeById");
 module.exports = {
   getByCategory,
   getById,
-  addToFavorite,
-  getAllByFav,
-  removeById,
+  updateUserFavorite,
+  getUserFavorite,
+  updateAndRemoveFavorite,
   addNotice,
   getAllByOwner,
   removeNoticeById,
