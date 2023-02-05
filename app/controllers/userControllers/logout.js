@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const {User} = require('../../models/userModel');
 
 const logout = async (req, res, next) => {
   try {
@@ -7,6 +7,10 @@ const logout = async (req, res, next) => {
       message: "The user is logged out",
     });
   } catch (err) {
+     res.json({
+            message: 'Missing header with authorization token',
+        
+        })
     next(err);
   }
 };

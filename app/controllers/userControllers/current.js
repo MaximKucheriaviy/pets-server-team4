@@ -1,4 +1,4 @@
-const { User } = require('../../models');
+const { User } = require('../../models/userModel');
 
 
 const current = async (req, res, next) => {
@@ -7,10 +7,15 @@ const current = async (req, res, next) => {
         res.json({
             message: 'Information found.',
             email: user.email,
+            name:user.name,
             id: user._id,
         })
     }
-    catch(err){
+    catch (err) {
+         res.json({
+            message: 'Missing header with authorization token',
+        
+        })
         next(err);
     }
 }
