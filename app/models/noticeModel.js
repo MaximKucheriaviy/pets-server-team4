@@ -11,7 +11,7 @@ const noticeSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "Set name of your pet"],
+      default: "",
     },
     birthdate: {
       type: String,
@@ -19,7 +19,7 @@ const noticeSchema = new Schema(
     },
     breed: {
       type: String,
-      default: "love",
+      default: "lucky",
     },
     place: {
       type: String,
@@ -40,6 +40,7 @@ const noticeSchema = new Schema(
     },
     comment: {
       type: String,
+      default: "",
     },
     category: {
       type: String,
@@ -60,15 +61,20 @@ noticeSchema.post("save", handleSchemaValidationErrors);
 const addSchema = Joi.object({
   title: Joi.string().min(2).max(48).required(),
   name: Joi.string()
-    .required()
     .regex(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]*$/)
     .min(2)
     .max(16),
-  birthdate: Joi.date().format("DD.MM.YYYY").required().messages({
+  birthdate: Joi.date().format("DD.MM.YYYY").messages({
     "date.format": " Please, type in DD.MM.YYYY format",
   }),
   breed: Joi.string().min(2).max(24),
-  place: Joi.string().required(),
+  place: Joi.string()
+    .regex(/^[a-zA-Z]+,\s[a-zA-Z]+$/)
+    .required()
+    .messages({
+      "string.regex":
+        "consists of city and region, and separate by - ,. Example: 'Brovary' , 'Kyiv'.",
+    }),
   sex: Joi.string().valid("male", "female").required(),
   price: Joi.number().greater(0).integer(),
   comment: Joi.string().regex(
