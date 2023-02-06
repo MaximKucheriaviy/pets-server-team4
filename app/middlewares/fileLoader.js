@@ -26,7 +26,7 @@ const fileLoader = async (req, res, next) => {
   }
   const avatar = await addAvatar(uniqueName, filename, destination);
   const avatarURL = await setAvatarURL(avatar, destination);
-  req.avatarURL = avatarURL;
+  req.body.avatarURL = avatarURL;
   next();
 };
 

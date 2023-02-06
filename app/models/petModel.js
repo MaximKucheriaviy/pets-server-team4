@@ -6,7 +6,7 @@ const petsSchema = new Schema(
       type: String,
       required: [true, 'Set  name your pet'],
     },
-    birthdate: {
+    date: {
       type: String,
       required: [true, 'Set birthdate your pet'],
     },
