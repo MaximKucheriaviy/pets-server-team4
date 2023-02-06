@@ -62,15 +62,16 @@ const noticeSchema = new Schema(
 noticeSchema.post("save", handleSchemaValidationErrors);
 
 const addSchema = Joi.object({
-  title: Joi.string().required(),
+  title: Joi.string().min(2).max(48).required(),
   name: Joi.string()
     .required()
     .regex(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]*$/)
-    .min(2),
+    .min(2)
+    .max(16),
   birthdate: Joi.date().format("DD.MM.YYYY").required().messages({
     "date.format": " Please, type in DD.MM.YYYY format",
   }),
-  breed: Joi.string(),
+  breed: Joi.string().min(2).max(24),
   place: Joi.string().required(),
   sex: Joi.string().valid("male", "female").required(),
   price: Joi.number().greater(0).integer(),
