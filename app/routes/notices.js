@@ -1,7 +1,7 @@
 const express = require("express");
 
 const controller = require("../controllers/notices");
-const { ctrlWrapper } = require("../helpers");
+const { ctrlWrapper, upload } = require("../helpers");
 const { auth, isValidId, validateBody } = require("../middlewares");
 const { schemas } = require("../models/noticeModel");
 
@@ -19,6 +19,7 @@ router.get("/", auth, ctrlWrapper(controller.getAllByOwner));
 router.post(
   "/",
   auth,
+  upload.single("petImage"),
   validateBody(schemas.addSchema),
   ctrlWrapper(controller.addNotice)
 );
