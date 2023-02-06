@@ -2,8 +2,8 @@ const petsService = require("./petsService");
 const { addAvatar, setAvatarURL } = require("./uploadService");
 const { uploadImage, deleteImage, getAvatarUrl } = require("./google-cloud");
 const {
-  uploadImageForNotice,
-  deleteImageFromNotice,
+  uploadImageToStorage,
+  deleteImageFromStorage,
 } = require("./imagesCloud");
 
 module.exports = {
@@ -13,6 +13,6 @@ module.exports = {
   uploadImage,
   deleteImage,
   getAvatarUrl,
-  uploadImageForNotice,
-  deleteImageFromNotice,
+  uploadImageToStorage,
+  deleteImageFromStorage,
 };
