@@ -1,5 +1,4 @@
 const { User } = require("../../models/userModel");
-const { Notice } = require("../../models/noticeModel");
 const httpError = require("../../helpers/httpError");
 
 const updateUserFavorite = async (req, res) => {
