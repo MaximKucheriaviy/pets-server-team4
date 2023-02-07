@@ -68,13 +68,7 @@ const addSchema = Joi.object({
     "date.format": " Please, type in DD.MM.YYYY format",
   }),
   breed: Joi.string().min(2).max(24),
-  place: Joi.string()
-    .regex(/^[a-zA-Z]+,\s[a-zA-Z]+$/)
-    .required()
-    .messages({
-      "string.regex":
-        "consists of city and region, and separate by - ,. Example: 'Brovary' , 'Kyiv'.",
-    }),
+  place: Joi.string().required(),
   sex: Joi.string().valid("male", "female").required(),
   price: Joi.number().greater(0).integer(),
   comment: Joi.string().regex(
