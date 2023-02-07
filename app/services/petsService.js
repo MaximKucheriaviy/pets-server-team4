@@ -5,10 +5,7 @@ const { deleteImage } = require("./google-cloud");
 const { Pet } = require("../models");
 
 const getAllPet = async (userID) => {
-  const pets = await Pet.find({ owner: userID }).populate(
-    "owner",
-    "_id name email"
-  );
+  const pets = await Pet.find({ owner: userID })
   return pets;
 };
 
