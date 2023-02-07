@@ -21,7 +21,7 @@ const noticeSchema = new Schema(
       type: String,
       default: "lucky",
     },
-    place: {
+    location: {
       type: String,
       required: true,
     },
@@ -38,7 +38,7 @@ const noticeSchema = new Schema(
       type: String,
       default: "",
     },
-    comment: {
+    comments: {
       type: String,
       default: "",
     },
