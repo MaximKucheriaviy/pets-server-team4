@@ -4,7 +4,6 @@ const { httpError } = require("../../helpers");
 const getByCategory = async (req, res) => {
   const { type: category } = req.params;
   const { query } = req.query;
-  console.log(query);
 
   const result = await Notice.find({ category });
 

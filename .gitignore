@@ -105,5 +105,6 @@ dist
 
 # Key for Google Cloud
 gsp.json
+googleInfo.json
 
 .env
