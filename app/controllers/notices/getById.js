@@ -3,7 +3,6 @@ const { httpError } = require("../../helpers");
 
 const getById = async (req, res) => {
   const { noticeId } = req.params;
-  console.log("noticeId", noticeId);
 
   const result = await Notice.findById(noticeId);
 
