@@ -59,28 +59,13 @@ const noticeSchema = new Schema(
 noticeSchema.post("save", handleSchemaValidationErrors);
 
 const addSchema = Joi.object({
-  title: Joi.string().min(2).max(48).required(),
-  name: Joi.string()
-    .regex(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]*$/)
-    .min(2)
-    .max(16),
-  birthdate: Joi.date().format("DD.MM.YYYY").messages({
-    "date.format": " Please, type in DD.MM.YYYY format",
-  }),
-  breed: Joi.string().min(2).max(24),
-  place: Joi.string()
-    .regex(/^[a-zA-Z]+,\s[a-zA-Z]+$/)
-    .required()
-    .messages({
-      "string.regex":
-        "consists of city and region, and separate by - ,. Example: 'Brovary' , 'Kyiv'.",
-    }),
-  sex: Joi.string().valid("male", "female").required(),
-  price: Joi.number().greater(0).integer(),
-  comment: Joi.string().regex(
-    /^[0-9a-zA-Zа-яА-ЯёЁіІїЇєЄ!@#$%^&+=*,:;><'"~`?_\-()\/.|\s]{8,120}$/
-  ),
-
+  title: Joi.string().required(),
+  name: Joi.string(),
+  breed: Joi.string(),
+  place: Joi.string().required(),
+  sex: Joi.string().required(),
+  price: Joi.string(),
+  comment: Joi.string(),
   category: Joi.string().valid("sell", "lost-found", "for-free").required(),
 });
 
