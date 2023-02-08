@@ -5,7 +5,10 @@ const getByCategory = async (req, res) => {
   const { type: category } = req.params;
   const { query } = req.query;
 
-  const result = await Notice.find({ category });
+  const result = await Notice.find({ category }).populate(
+    "owner",
+    "email phone"
+  );
 
   if (!result) {
     throw httpError(404, "Not found");
@@ -18,7 +21,7 @@ const getByCategory = async (req, res) => {
 
     res.json(filteredResult);
   } else {
-    res.json(result);
+    res.json(result.reverse());
   }
 };
 
