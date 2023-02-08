@@ -1,7 +1,7 @@
-const JoiImport = require('joi');
-const JoiDate = require('@joi/date');
-const Joi = JoiImport.extend(JoiDate);
-Joi.objectId = require('joi-objectid')(Joi);
+const Joi = require('joi');
+// const JoiDate = require('@joi/date');
+// const Joi = JoiImport.extend(JoiDate);
+// Joi.objectId = require('joi-objectid')(Joi);
 
 const addPetSchema = Joi.object({
   name: Joi.string()
@@ -14,14 +14,7 @@ const addPetSchema = Joi.object({
       'string.max': 'Name should have a maximum length of {#limit}',
       'string.pattern.base': 'Name should have only letters',
     }),
-  birthdate: Joi.date()
-    .format('DD.MM.YYYY')
-    .raw()
-    .max('now')
-    .required()
-    .messages({
-      'date.format': ' Please, type in DD.MM.YYYY format',
-    }),
+  date: Joi.string(),
   breed: Joi.string()
     .regex(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]*$/)
     .min(2)

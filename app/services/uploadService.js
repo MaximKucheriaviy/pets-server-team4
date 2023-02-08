@@ -34,4 +34,6 @@ const addAvatar = async (name, filename, destination) => {
 const setAvatarURL = async (filename, destination) =>
   await getAvatarUrl(filename, destination);
 
+
+
 module.exports = { addAvatar, setAvatarURL };

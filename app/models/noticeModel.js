@@ -11,7 +11,7 @@ const noticeSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "Set name of your pet"],
+      default: "",
     },
     birthdate: {
       type: String,
@@ -19,7 +19,7 @@ const noticeSchema = new Schema(
     },
     breed: {
       type: String,
-      default: "love",
+      default: "lucky",
     },
     place: {
       type: String,
@@ -40,6 +40,7 @@ const noticeSchema = new Schema(
     },
     comment: {
       type: String,
+      default: "",
     },
     category: {
       type: String,
@@ -58,23 +59,14 @@ const noticeSchema = new Schema(
 noticeSchema.post("save", handleSchemaValidationErrors);
 
 const addSchema = Joi.object({
-  title: Joi.string().min(2).max(48).required(),
-  name: Joi.string()
-    .required()
-    .regex(/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s]*$/)
-    .min(2)
-    .max(16),
-  birthdate: Joi.date().format("DD.MM.YYYY").required().messages({
-    "date.format": " Please, type in DD.MM.YYYY format",
-  }),
-  breed: Joi.string().min(2).max(24),
+  birthdate: Joi.string(),
+  title: Joi.string().required(),
+  name: Joi.string(),
+  breed: Joi.string(),
   place: Joi.string().required(),
-  sex: Joi.string().valid("male", "female").required(),
-  price: Joi.number().greater(0).integer(),
-  comment: Joi.string().regex(
-    /^[0-9a-zA-Zа-яА-ЯёЁіІїЇєЄ!@#$%^&+=*,:;><'"~`?_\-()\/.|\s]{8,120}$/
-  ),
-
+  sex: Joi.string().required(),
+  price: Joi.string(),
+  comment: Joi.string(),
   category: Joi.string().valid("sell", "lost-found", "for-free").required(),
 });
 
