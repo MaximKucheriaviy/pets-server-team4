@@ -23,7 +23,7 @@ const updateUserFavorite = async (req, res) => {
       { new: true }
     );
 
-    res.json(result);
+    res.json(result.reverse());
   }
 };
 

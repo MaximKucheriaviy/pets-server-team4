@@ -4,7 +4,7 @@ const getUserFavorite = async (req, res) => {
   const result = await User.findOne({ _id: req._id }).populate(
     "favoriteNotices"
   );
-  res.json(result);
+  res.json(result.reverse());
 };
 
 module.exports = getUserFavorite;
