@@ -9,6 +9,9 @@ const current = async (req, res, next) => {
             email: user.email,
             name:user.name,
             id: user._id,
+            phone: user.phone,
+            birthday: user.birthday,
+            city: user.city
         })
     }
     catch (err) {
