@@ -12,7 +12,7 @@ const current = async (req, res, next) => {
             phone: user.phone,
             birthday: user.birthday,
             city: user.city,
-            avaterURL: user.avatarURL
+            avatarURL: user.avatarURL
         })
     }
     catch (err) {

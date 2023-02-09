@@ -28,6 +28,7 @@ const chageUserAvatart = async (req, res, next) => {
     }
     await uploadImageToStorage(originalname, fileName);
     await fs.unlink(req.file.path);
+    result.avatarURL = imageURL;
     res.status(201).json(result);
   } catch (err) {
     await fs.unlink(req.file.path);
