@@ -31,7 +31,7 @@ const userSchema = new Schema(
 
     avatarURL: {
       type: String,
-      requireda: true,
+      default: null
     },
 
     phone: {

@@ -2,7 +2,7 @@ const signup = require('./signup');
 const login = require('./login');
 const logout = require('./logout');
 const current = require('./current');
-const {chageUserName, chageUserEmail, chageUserPhone, chageUserBirthday, chageUserCity} = require("./changeInfo");
+const {chageUserName, chageUserEmail, chageUserPhone, chageUserBirthday, chageUserCity, chageUserAvatart} = require("./changeInfo");
 
 module.exports = {
     signup,
@@ -13,5 +13,6 @@ module.exports = {
     chageUserEmail,
     chageUserPhone,
     chageUserBirthday,
-    chageUserCity
+    chageUserCity,
+    chageUserAvatart
 };

@@ -11,7 +11,8 @@ const current = async (req, res, next) => {
             id: user._id,
             phone: user.phone,
             birthday: user.birthday,
-            city: user.city
+            city: user.city,
+            avaterURL: user.avatarURL
         })
     }
     catch (err) {

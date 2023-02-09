@@ -5,6 +5,36 @@ const { User } = require("../../models/userModel");
 
 const BASE_URL = "https://storage.googleapis.com/pets-project-api";
 
+const chageUserAvatart = async (req, res, next) => {
+  if (!req.file) {
+    const err = new Error();
+    err.status = 400;
+    err.message = "No file";
+    next(err);
+  }
+  try {
+    const { path: tempUpload, originalname } = req.file;
+    const fileName = `${nanoid()}_${originalname}`;
+    const imageURL = `${BASE_URL}/${fileName}`;
+
+    const result = await User.findByIdAndUpdate(req._id, {
+      avatarURL: imageURL,
+    });
+    if (!result) {
+      const err = new Error();
+      err.status = 500;
+      err.message = "File register error";
+      next(err);
+    }
+    await uploadImageToStorage(originalname, fileName);
+    await fs.unlink(req.file.path);
+    res.status(201).json(result);
+  } catch (err) {
+    await fs.unlink(req.file.path);
+    next(err);
+  }
+};
+
 const chageUserName = async (req, res, next) => {
   const { value } = req.body;
   if (!value) {
@@ -18,16 +48,16 @@ const chageUserName = async (req, res, next) => {
       const err = new Error();
       err.status = 400;
       err.message = "Patch error";
+      next(err);
     }
     res.status(201).json({
-        message: "User name updated",
-        data: result
-    })
+      message: "User name updated",
+      data: result,
+    });
   } catch (err) {
     next(err);
   }
 };
-
 
 const chageUserEmail = async (req, res, next) => {
   const { value } = req.body;
@@ -35,6 +65,7 @@ const chageUserEmail = async (req, res, next) => {
     const err = new Error();
     err.status = 400;
     err.message = "No value";
+    next(err);
   }
   try {
     const result = await User.findByIdAndUpdate(req._id, { email: value });
@@ -42,11 +73,12 @@ const chageUserEmail = async (req, res, next) => {
       const err = new Error();
       err.status = 400;
       err.message = "Patch error";
+      next(err);
     }
     res.status(201).json({
-        message: "User email updated",
-        data: result
-    })
+      message: "User email updated",
+      data: result,
+    });
   } catch (err) {
     next(err);
   }
@@ -58,6 +90,7 @@ const chageUserPhone = async (req, res, next) => {
     const err = new Error();
     err.status = 400;
     err.message = "No value";
+    next(err);
   }
   try {
     const result = await User.findByIdAndUpdate(req._id, { phone: value });
@@ -65,11 +98,12 @@ const chageUserPhone = async (req, res, next) => {
       const err = new Error();
       err.status = 400;
       err.message = "Patch error";
+      next(err);
     }
     res.status(201).json({
-        message: "User phone updated",
-        data: result
-    })
+      message: "User phone updated",
+      data: result,
+    });
   } catch (err) {
     next(err);
   }
@@ -81,6 +115,7 @@ const chageUserBirthday = async (req, res, next) => {
     const err = new Error();
     err.status = 400;
     err.message = "No value";
+    next(err);
   }
   try {
     const result = await User.findByIdAndUpdate(req._id, { birthday: value });
@@ -88,16 +123,16 @@ const chageUserBirthday = async (req, res, next) => {
       const err = new Error();
       err.status = 400;
       err.message = "Patch error";
+      next(err);
     }
     res.status(201).json({
-        message: "User birthday updated",
-        data: result
-    })
+      message: "User birthday updated",
+      data: result,
+    });
   } catch (err) {
     next(err);
   }
 };
-
 
 const chageUserCity = async (req, res, next) => {
   const { value } = req.body;
@@ -105,6 +140,7 @@ const chageUserCity = async (req, res, next) => {
     const err = new Error();
     err.status = 400;
     err.message = "No value";
+    next(err);
   }
   try {
     const result = await User.findByIdAndUpdate(req._id, { city: value });
@@ -112,16 +148,16 @@ const chageUserCity = async (req, res, next) => {
       const err = new Error();
       err.status = 400;
       err.message = "Patch error";
+      next(err);
     }
     res.status(201).json({
-        message: "User city updated",
-        data: result
-    })
+      message: "User city updated",
+      data: result,
+    });
   } catch (err) {
     next(err);
   }
 };
-
 
 module.exports = {
   chageUserName,
@@ -129,4 +165,5 @@ module.exports = {
   chageUserPhone,
   chageUserBirthday,
   chageUserCity,
-}
+  chageUserAvatart,
+};
